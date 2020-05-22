@@ -19,4 +19,8 @@ Route::post('login', 'API\RegisterController@login');
 
 Route::middleware('auth:api')->group( function () {
     Route::resource('products', 'API\ProductController');
+
+    Route::group(['prefix' => 'products'],function(){
+        Route::resource('/{product}/reviews','API\ReviewController');
+    });
 });
