@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\ReviewBlogRequest;
 use App\Http\Resources\ReviewResourse;
-use App\Product;
-use App\Review;
+use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ReviewController extends BaseController

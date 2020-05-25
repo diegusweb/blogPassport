@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Contracts\IAUthRepository;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BlogUserCreateRequest;
 use App\User;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;

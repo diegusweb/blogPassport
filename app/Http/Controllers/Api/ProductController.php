@@ -3,24 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Contracts\IProductRepository;
 use App\Http\Requests\ProductBlogRequest;
 //use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductCollections;
 use App\Http\Resources\ProductResourse;
+use App\Models\Product;
 
-use App\Product;
 
 class ProductController extends BaseController
 {
+    private $productRepository;
+    /**
+     * ProductController constructor.
+     */
+    public function __construct(IProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     public function index()
     {
-        $products = Product::all();
+        $products = $this->productRepository->all();
 
-         //return new ProductCollection(Product::all());
-
-         //dd($products);
-
-        return $this->sendResponse(new ProductCollections(Product::all()), 'Products retrieved successfully.');
+        return $this->sendResponse(new ProductCollections($products), 'Products retrieved successfully.');
     }
 
     public function store(ProductBlogRequest $request)
@@ -35,7 +41,7 @@ class ProductController extends BaseController
 
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = $this->productRepository->find($id);
 
         if (is_null($product)) {
             return $this->sendError('Product not found.');
