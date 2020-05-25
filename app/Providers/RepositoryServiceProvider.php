@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Providers;
+
+use App\Contracts\IAUthRepository;
+use App\Repositories\AuthRepository;
+use Illuminate\Support\ServiceProvider;
+
+class RepositoryServiceProvider extends ServiceProvider
+{
+    protected $repositories = [
+        IAUthRepository::class         =>          AuthRepository::class,
+    ];
+
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        foreach ($this->repositories as $interface => $implementation)
+        {
+            $this->app->bind($interface, $implementation);
+        }
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+}

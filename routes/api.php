@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('register', 'API\RegisterController@register');
-Route::post('login', 'API\RegisterController@login');
+Route::post('register', 'API\AuthController@register');
+Route::post('login', 'API\AuthController@login');
 
 Route::middleware('auth:api')->group( function () {
-    Route::get('logout', 'API\RegisterController@logout')->name('logout');
+    Route::get('logout', 'API\AuthController@logout')->name('logout');
 
     Route::resource('products', 'API\ProductController');
 
